@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  TRUE
+  FALSE
+  OS
+}
+
+model Marking {
+  id                  Int @id @default(autoincrement())
+  marking             String
+  markingNumber       Int
+  pairedPatrolCrew    Boolean
+
+  officers Officer[]
+}
+
+model Rank {
+  id   Int @id @default(autoincrement())
+  name String
+  icon String
+
+  officers Officer[]
+}
+
+model Shift {
+  id  Int @id @default(autoincrement())
+  headOfShift Int
+}
+
+model Role {
+  id Int @id @default(autoincrement())
+}
+
+model Officer {
+  id            Int       @id @default(autoincrement())
+  name          String
+  lastUpdate    DateTime  @default(now())
+  badgeNumber   String    @unique
+  location      String
+  status        Status?
+
+  shiftId       Int
+
+  roleId        Int
+
+  rankId        Int
+  rank Rank @relation(fields: [rankId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  markingId     Int?
+  marking Marking? @relation(fields: [markingId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  token         String
+}
