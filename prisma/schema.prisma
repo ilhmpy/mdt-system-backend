@@ -49,10 +49,11 @@ model Shift {
 model Permission {
   id Int @id @default(autoincrement())
   canActivateName  Pages
-  canActivate      Boolean
+  get              Boolean
   create           Boolean?
   delete           Boolean?
   update           Boolean?
+  selfUpdate       Boolean?
 
   roleId Int
   role   Role @relation(fields: [roleId], references: [id])
