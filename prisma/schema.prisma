@@ -24,9 +24,9 @@ enum Pages {
 }
 
 model Marking {
-  id                  Int @id @default(autoincrement())
-  label               String
-  marking             String
+  id                  Int @id @default(autoincrement()) @unique
+  label               String @unique
+  marking             String @unique
   pairedPatrolCrew    Boolean
 
   officers Officer[]
@@ -34,7 +34,7 @@ model Marking {
 
 model Rank {
   id   Int @id @default(autoincrement())
-  name String
+  name String @unique
   icon String?
 
   officers Officer[]
@@ -43,7 +43,7 @@ model Rank {
 model Shift {
   id  Int @id @default(autoincrement())
   
-  officers Officer[] // Офицеры, работающие в смене
+  officers Officer[]
 }
 
 model Permission {
@@ -68,12 +68,12 @@ model Role {
 
 model Officer {
   id            Int       @id @default(autoincrement())
-  name          String
+  name          String    @unique
   lastUpdate    DateTime  @default(now())
   badgeNumber   String    @unique
   location      String
   status        Status?
-  markingNumber Int?
+  markingNumber Int?      
   isHead        Boolean?  @default(false)
 
   shiftId       Int
@@ -88,5 +88,5 @@ model Officer {
   markingId     Int?
   marking       Marking? @relation(fields: [markingId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
-  token         String
+  token         String  @unique
 }

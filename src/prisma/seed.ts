@@ -307,7 +307,7 @@ const officers = [
     token: '$argon2id$v=19$m=65536,t=3,p=4$iMNpORGUSqc681CfTPeG2A$Gq8uzJPMzSlWMkjowC9/ank76lhS0HvS//voO0IdP7E',
   },
   {
-    name: 'Paul Robinson',
+    name: 'Paul McCarthy',
     lastUpdate: new Date('2025-02-21T09:55:36.485621'),
     badgeNumber: 'LS14824',
     location: 'Clinton Ave',
@@ -481,44 +481,52 @@ const shifts = [
   { id: 5, headOfShift: 16 },
 ]
 
+const createType: "markingsRolesAndRanks" | "officer" = "officer"; 
+
 async function main() {
-    /*await prisma.marking.createMany({
-      data: markings,
-    });*/
+    switch(createType) {
+      case("markingsRolesAndRanks"): {
+        await prisma.marking.createMany({
+          data: markings,
+        });
 
-    /*for (let rolesData of roles) {
-      await prisma.role.create({
-        data: {
-          name: rolesData.name,
-          permissions: {
-            create: rolesData.permissions
-          }
-        }
-      })
-    }*/
-
-    /*await prisma.officer.createMany({
-      data: officers
-    })*/
-
-      /*await Promise.all([
-        prisma.shift.create({ data: {} }),
-        prisma.shift.create({ data: {} }),
-        prisma.shift.create({ data: {} }),
-        prisma.shift.create({ data: {} }),
-        prisma.shift.create({ data: {} }),
-        prisma.shift.create({ data: {} }),
-      ])
+        await prisma.rank.createMany({
+          data: ranks
+        })
     
-      const officersArr = officers.map((officer) =>
-        ({ ...officer, shiftId: Math.ceil(Math.random() * 6) })
-      )
+        for (let rolesData of roles) {
+          await prisma.role.create({
+            data: {
+              name: rolesData.name,
+              permissions: {
+                create: rolesData.permissions
+              }
+            }
+          })
+        } 
+        
+        break;
+      }
 
-      await Promise.all([
-        prisma.officer.createMany({ data: officersArr })
-      ]);
-      */
-
+      case("officer"): {    
+         const shifts = await Promise.all([
+            prisma.shift.create({ data: {} }),
+            prisma.shift.create({ data: {} }),
+            prisma.shift.create({ data: {} }),
+            prisma.shift.create({ data: {} }),
+            prisma.shift.create({ data: {} }),
+            prisma.shift.create({ data: {} }),
+         ]);
+        
+          const officersArr = officers.map((officer) =>
+            ({ ...officer, shiftId: shifts[Math.floor(Math.random() * shifts.length)].id })
+          )
+    
+          await Promise.all([
+            prisma.officer.createMany({ data: officersArr })
+          ]);
+      }
+    }
     console.log('Seed data inserted successfully.');
   }
   
