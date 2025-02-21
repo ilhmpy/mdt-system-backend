@@ -6,10 +6,7 @@ import { OfficersController } from './officers/officers.controller';
 import { AuthController } from './auth/auth.controller';
 
 @Module({
-  imports: [
-    OfficersService,
-    AuthService
-  ],
+  imports: [],
 
   controllers: [
     OfficersController,
