@@ -16,7 +16,7 @@ export class OfficersController {
         const officer = await this.prisma.officer.findUnique(
             { 
                 where: { token }, 
-                include: { rank: true, marking: true, role: { include: { permissions: true } } }
+                include: { rank: true, marking: true, shift: true, role: { include: { permissions: true } } }
             }
         ).catch(e => console.log("getOfficer Error", e));
 
@@ -28,7 +28,7 @@ export class OfficersController {
     @UseGuards(AuthGuard)
     async getOfficers() {
         const officers: Officer[] = await this.prisma.officer.findMany({ 
-            include: { rank: true, marking: true, role: { include: { permissions: true } } }
+            include: { rank: true, marking: true, shift: true, role: { include: { permissions: true } } }
         });
         let formattedOfficers: Officer[] = [];
 

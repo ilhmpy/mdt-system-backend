@@ -59,6 +59,7 @@ model Permission {
   role   Role @relation(fields: [roleId], references: [id])
 }
 
+// прописать массив рангов которые могут иметь эту роль
 model Role {
   id Int @id @default(autoincrement())
   name String @unique
