@@ -14,4 +14,8 @@ export class OfficersService {
                     JSON.parse(officer?.status) : officer?.status 
         }
     }
+
+    formattingAll(officers) {
+        return officers.map((officer) => this.formating(officer));
+    }
 }

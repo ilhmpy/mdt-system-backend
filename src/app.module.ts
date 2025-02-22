@@ -6,6 +6,7 @@ import { OfficersController } from './officers/officers.controller';
 import { RolesService } from './services/roles.service';
 import { GuardService } from './services/guard.service';
 import { OfficersService } from './officers/officers.service';
+import { EventsGateway } from './eventsgateway';
 
 @Module({
   imports: [],
@@ -20,6 +21,7 @@ import { OfficersService } from './officers/officers.service';
     RolesService,
     GuardService,
     OfficersService,
+    EventsGateway,
   ],
   
   exports: [
@@ -28,6 +30,7 @@ import { OfficersService } from './officers/officers.service';
     RolesService,
     GuardService,
     OfficersService,
+    EventsGateway
   ]
 })
 export class AppModule {}
