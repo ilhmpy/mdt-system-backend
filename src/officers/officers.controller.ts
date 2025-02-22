@@ -1,17 +1,16 @@
-import { Controller, Get, Headers, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Head, Headers, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth/auth.guard';
 import { RolesGuard } from 'src/guards/roles/roles.guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { OfficersService } from './officers.service';
-import { Officer } from '@prisma/client';
+import { Officer, Status } from '@prisma/client';
 
 @Controller('officers')
 export class OfficersController {
     constructor(private prisma: PrismaService, private OfficersService: OfficersService) {}
 
     @Get("get-officer")
-    @UseGuards(RolesGuard)
-    @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard, RolesGuard)
     async getOfficer(@Headers("authorization") token: string) {
         const officer = await this.prisma.officer.findUnique(
             { 
@@ -24,8 +23,7 @@ export class OfficersController {
     }
 
     @Get("get-officers")
-    @UseGuards(RolesGuard)
-    @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard, RolesGuard)
     async getOfficers() {
         const officers: Officer[] = await this.prisma.officer.findMany({ 
             include: { rank: true, marking: true, shift: true, role: { include: { permissions: true } } }
@@ -37,5 +35,16 @@ export class OfficersController {
         }
 
         return formattedOfficers;
+    }
+
+    @Put("update-status")
+    @UseGuards(AuthGuard, RolesGuard)
+    updateStatus(@Headers("authorization") token: string, @Body() { status }: { status: Status }) {
+        const updatedOfficer = this.prisma.officer.update({ 
+            where: { token },
+            data: { status }  
+        }).catch(e => console.log("Prisma updateStatus Error", e));
+
+        return updatedOfficer;
     }
 }   

@@ -41,9 +41,18 @@ export class RolesGuard implements CanActivate {
 
     switch(canActivateName.pageName) {
       case ("officers"): {
-        if (canActivateName.reqName === "get-officer" || canActivateName.reqName === "get-officers") {
+        if (
+          canActivateName.reqName === "get-officer" || 
+          canActivateName.reqName === "get-officers"
+        ) {
           return !!correspondendPermission?.get;
         }
+
+        if (canActivateName.reqName == "update-status") {
+          return !!correspondendPermission?.selfUpdate;
+        }
+
+        break;
       }
     }
 
