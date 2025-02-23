@@ -44,7 +44,7 @@ export class OfficersController {
     async updateStatus(@Headers("authorization") token: string, @Body() { status }: { status: Status }) {
         const updatedOfficer = await this.prisma.officer.update({ 
             where: { token },
-            data: { status },
+            data: { lastUpdate: new Date(), status },
             include: this.OfficersService.getOfficerInclude()
         });
 

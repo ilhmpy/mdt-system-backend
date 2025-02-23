@@ -7,12 +7,15 @@ import { RolesService } from './services/roles.service';
 import { GuardService } from './services/guard.service';
 import { OfficersService } from './officers/officers.service';
 import { EventsGateway } from './eventsgateway';
+import { PanicController } from './panic/panic.controller';
+import { PanicService } from './panic/panic.service';
 
 @Module({
   imports: [],
   controllers: [
     OfficersController,
-    AuthController
+    AuthController,
+    PanicController
   ],
 
   providers: [
@@ -22,6 +25,7 @@ import { EventsGateway } from './eventsgateway';
     GuardService,
     OfficersService,
     EventsGateway,
+    PanicService,
   ],
   
   exports: [
@@ -30,7 +34,8 @@ import { EventsGateway } from './eventsgateway';
     RolesService,
     GuardService,
     OfficersService,
-    EventsGateway
+    EventsGateway,
+    PanicService,
   ]
 })
 export class AppModule {}

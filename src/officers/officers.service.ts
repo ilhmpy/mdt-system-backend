@@ -39,7 +39,7 @@ export class OfficersService {
     async updateMarking(token: string, markingId: number, markingNumber: number) {
         const updatedOfficer = await this.prisma.officer.update({ 
             where: { token },
-            data: { markingId, markingNumber },
+            data: { lastUpdate: new Date(), markingId, markingNumber },
             include: this.getOfficerInclude()
         });
     

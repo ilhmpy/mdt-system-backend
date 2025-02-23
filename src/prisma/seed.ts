@@ -17,6 +17,7 @@ const roles = [
   { 
     name: "officer",
     permissions: [
+      { canActivateName: Pages.panic, get: true, selfUpdate: true },
       { canActivateName: Pages.profile, get: true },
       { canActivateName: Pages.officers, get: true, selfUpdate: true },
       { canActivateName: Pages.ncinc, get: true, selfUpdate: true },
@@ -30,6 +31,7 @@ const roles = [
   { 
     name: "head-of-shift",
     permissions: [
+      { canActivateName: Pages.panic, get: true, selfUpdate: true },
       { canActivateName: Pages.profile, get: true, selfUpdate: true },
       { canActivateName: Pages.officers, get: true, selfUpdate: true },
       { canActivateName: Pages.ncinc, get: true, selfUpdate: true },
@@ -43,6 +45,7 @@ const roles = [
   { 
     name: "junior-senior-staff",
     permissions: [
+      { canActivateName: Pages.panic, get: true, selfUpdate: true },
       { canActivateName: Pages.profile, get: true, selfUpdate: true },
       { canActivateName: Pages.officers, get: true, selfUpdate: true, update: true },
       { canActivateName: Pages.ncinc, get: true, selfUpdate: true, update: true },
@@ -56,6 +59,7 @@ const roles = [
   { 
     name: "senior-staff",
     permissions: [
+      { canActivateName: Pages.panic, get: true, selfUpdate: true },
       { canActivateName: Pages.profile, get: true, create: true, delete: true, selfUpdate: true },
       { canActivateName: Pages.officers, get: true, update: true, create: true, delete: true, selfUpdate: true },
       { canActivateName: Pages.ncinc, get: true, update: true, create: true, delete: true, selfUpdate: true },
@@ -69,6 +73,7 @@ const roles = [
   { 
     name: "dispatcher",
     permissions: [
+      { canActivateName: Pages.panic, get: true, selfUpdate: true },
       { canActivateName: Pages.profile, get: true, update: true, selfUpdate: true },
       { canActivateName: Pages.officers, get: true, update: true, selfUpdate: true },
       { canActivateName: Pages.ncinc, get: true, update: true, selfUpdate: true },
@@ -475,7 +480,7 @@ const officers = [
   }, 
 ];
 
-const createType: "markingsRolesAndRanks" | "officer" = "officer"; 
+const createType: "markingsRolesAndRanks" | "officer" = "markingsRolesAndRanks"; 
 
 async function main() {
     switch(createType) {

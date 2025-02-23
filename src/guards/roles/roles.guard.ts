@@ -44,9 +44,10 @@ export class RolesGuard implements CanActivate {
         "get-officers": !!correspondendPermission?.get,
         "update-status": !!correspondendPermission?.selfUpdate,
         "get-markings": !!correspondendPermission?.get,
-        "update-marking": !!correspondendPermission?.selfUpdate
+        "update-marking": !!correspondendPermission?.selfUpdate,
+        "activate-signal": !!correspondendPermission?.selfUpdate
       };
-  
+    
       return permissionsCheck[canActivateName.reqName] ?? false;
   }
 }
