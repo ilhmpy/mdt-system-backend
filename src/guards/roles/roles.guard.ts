@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, Headers } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Officer } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from 'src/services/auth.service';
 import { RolesService } from 'src/services/roles.service';
@@ -15,47 +15,38 @@ export class RolesGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext
   ): Promise<boolean> {
-    const token: string = this.AuthService.getToken(context);
-    const canActivateName = this.RolesService.getRolesCanActivateName(context);
+      const token: string = this.AuthService.getToken(context);
+      const canActivateName = this.RolesService.getRolesCanActivateName(context);
 
-    const officer = await this.prisma.officer.findUnique({ 
-        where: {
-          token
-        },
-        include: {
-          role: {
-            include: {
-              permissions: true
+      const officer = await this.prisma.officer.findUnique({ 
+          where: {
+            token
+          },
+          include: {
+            role: {
+              include: {
+                permissions: true
+              }
             }
           }
-        }
-    }).catch(e => {
-      console.log(e);
-    })
+      }).catch(e => {
+        console.log(e);
+      })
 
-    const permissions = officer?.role?.permissions;
-    const correspondendPermission = 
-      permissions?.find(
-        (permission) => permission.canActivateName == canActivateName.pageName
+      const permissionsMap = new Map(
+        officer?.role?.permissions?.map((p) => [p.canActivateName, p]) ?? []
       );
+  
+      const correspondendPermission = permissionsMap.get(canActivateName.pageName);
 
-    switch(canActivateName.pageName) {
-      case ("officers"): {
-        if (
-          canActivateName.reqName === "get-officer" || 
-          canActivateName.reqName === "get-officers"
-        ) {
-          return !!correspondendPermission?.get;
-        }
-
-        if (canActivateName.reqName == "update-status") {
-          return !!correspondendPermission?.selfUpdate;
-        }
-
-        break;
-      }
-    }
-
-    return false;
+      const permissionsCheck: Record<string, boolean> = {
+        "get-officer": !!correspondendPermission?.get,
+        "get-officers": !!correspondendPermission?.get,
+        "update-status": !!correspondendPermission?.selfUpdate,
+        "get-markings": !!correspondendPermission?.get,
+        "update-marking": !!correspondendPermission?.selfUpdate
+      };
+  
+      return permissionsCheck[canActivateName.reqName] ?? false;
   }
 }
