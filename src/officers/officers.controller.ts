@@ -6,6 +6,8 @@ import { OfficersService } from './officers.service';
 import { Marking, Officer, Status } from '@prisma/client';
 import { EventsGateway } from 'src/eventsgateway';
 
+let requests: string[] = [];
+
 @Controller('officers')
 export class OfficersController {
     constructor(private prisma: PrismaService, private OfficersService: OfficersService, private EventsGateway: EventsGateway) {}
@@ -15,7 +17,7 @@ export class OfficersController {
     async getOfficer(@Headers("authorization") token: string) {
         const officer = await this.prisma.officer.findUnique(
             { 
-                where: { token }, 
+                where: { token },  
                 include: this.OfficersService.getOfficerInclude()
             }
         ).catch(e => console.log("getOfficer Error", e));
@@ -25,9 +27,8 @@ export class OfficersController {
 
     @Get("get-officers")
     @UseGuards(AuthGuard, RolesGuard)
-    async getOfficers() {
+    async getOfficers(@Headers("authorization") token: string) {
         const officers: Officer[] = await this.prisma.officer.findMany({ include: this.OfficersService.getOfficerInclude() });
-
         return this.OfficersService.formattingAll(officers);
     }
 
@@ -85,7 +86,6 @@ export class OfficersController {
                 throw new HttpException("Your marking is the same as a previouse one", 300);
             }
         }
-
         return null;
     }
 }   

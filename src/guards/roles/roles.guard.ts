@@ -1,5 +1,4 @@
 import { CanActivate, ExecutionContext, Injectable, Headers } from '@nestjs/common';
-import { Officer } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from 'src/services/auth.service';
 import { RolesService } from 'src/services/roles.service';

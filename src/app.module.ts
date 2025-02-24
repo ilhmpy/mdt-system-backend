@@ -9,9 +9,17 @@ import { OfficersService } from './officers/officers.service';
 import { EventsGateway } from './eventsgateway';
 import { PanicController } from './panic/panic.controller';
 import { PanicService } from './panic/panic.service';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
-  imports: [],
+  imports: [
+    ThrottlerModule.forRoot([{
+      ttl: 60000,
+      limit: 10,
+    }]),
+  ],
   controllers: [
     OfficersController,
     AuthController,
@@ -26,6 +34,11 @@ import { PanicService } from './panic/panic.service';
     OfficersService,
     EventsGateway,
     PanicService,
+
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
   ],
   
   exports: [
