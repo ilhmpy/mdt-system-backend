@@ -69,6 +69,17 @@ model Role {
   officers Officer[]
 }
 
+model Panic {
+  id           Int @id @default(autoincrement())
+  officerId    Int @unique
+  lastUpdate   DateTime
+  name         String
+  badgeNumber  String
+  location     String
+
+  officer      Officer @relation(fields: [officerId], references: [id])
+}
+
 model Officer {
   id            Int       @id @default(autoincrement())
   name          String    @unique
@@ -92,4 +103,6 @@ model Officer {
   marking       Marking? @relation(fields: [markingId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   token         String  @unique
+
+  panics Panic[]
 }
