@@ -15,15 +15,15 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot([{
+    /*ThrottlerModule.forRoot([{
       ttl: 60000,
-      limit: 10,
-    }]),
+      limit: 20,
+    }]), */
   ],
-  controllers: [
+  controllers: [ 
     OfficersController,
     AuthController,
-    PanicController
+    PanicController,
   ],
 
   providers: [
@@ -35,10 +35,10 @@ import { APP_GUARD } from '@nestjs/core';
     EventsGateway,
     PanicService,
 
-    {
+    /*{
       provide: APP_GUARD,
       useClass: ThrottlerGuard
-    }
+    }*/
   ],
   
   exports: [

@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, Headers } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from 'src/services/auth.service';
 import { RolesService } from 'src/services/roles.service';
@@ -11,6 +11,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
+    const isTokenCorrect: Promise<boolean> = this.AuthService.isTokenCorrect(this.AuthService.getToken(context));
+
     return this.AuthService.isTokenCorrect(this.AuthService.getToken(context));
   }
 }

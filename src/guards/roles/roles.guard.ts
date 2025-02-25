@@ -1,14 +1,18 @@
 import { CanActivate, ExecutionContext, Injectable, Headers } from '@nestjs/common';
+import { EventsGateway } from 'src/eventsgateway';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from 'src/services/auth.service';
+import { GuardService } from 'src/services/guard.service';
 import { RolesService } from 'src/services/roles.service';
+
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(
     private RolesService: RolesService, 
     private prisma: PrismaService, 
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private EventsGateWay: EventsGateway
   ) {}
 
   async canActivate(
@@ -40,7 +44,7 @@ export class RolesGuard implements CanActivate {
 
       const permissionsCheck: Record<string, boolean> = {
         "get-officer": !!correspondendPermission?.get,
-        "get-officers": !!correspondendPermission?.get,
+        "get-officers": !!correspondendPermission?.get, 
         "update-status": !!correspondendPermission?.selfUpdate,
         "get-markings": !!correspondendPermission?.get,
         "update-marking": !!correspondendPermission?.selfUpdate,
@@ -48,7 +52,13 @@ export class RolesGuard implements CanActivate {
         "deactivate-signal": !!correspondendPermission?.selfUpdate,
         "get-signals": !!correspondendPermission?.get
       };
-      
-      return permissionsCheck[canActivateName.reqName] ?? false;
+
+      const isAllowed = (permissionsCheck[canActivateName.reqName] ?? false);
+
+      if(!isAllowed) {
+        this.EventsGateWay.server.emit("isNotAllowed");
+      }
+
+      return isAllowed;
   }
 }

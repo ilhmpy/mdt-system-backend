@@ -37,12 +37,16 @@ export class OfficersService {
     }
 
     async updateMarking(token: string, markingId: number, markingNumber: number) {
-        const updatedOfficer = await this.prisma.officer.update({ 
-            where: { token },
-            data: { lastUpdate: new Date(), markingId, markingNumber },
-            include: this.getOfficerInclude()
-        });
-    
-        this.EventsGateway.server.emit("updateOfficers", this.formating(updatedOfficer))
+         try {
+            const updatedOfficer = await this.prisma.officer.update({ 
+                where: { token },
+                data: { lastUpdate: new Date(), markingId, markingNumber },
+                include: this.getOfficerInclude()
+            });
+        
+            this.EventsGateway.server.emit("updateOfficers", this.formating(updatedOfficer))
+         } catch(e) {
+            console.log(e);
+         }
     }
 }
