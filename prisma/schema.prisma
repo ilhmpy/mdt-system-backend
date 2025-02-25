@@ -64,7 +64,7 @@ model Permission {
 model Role {
   id Int @id @default(autoincrement())
   name String @unique
-  permissions Permission[]
+  permissions Permission[] 
 
   officers Officer[]
 }
@@ -105,4 +105,93 @@ model Officer {
   token         String  @unique
 
   panics Panic[]
+}
+
+enum CivilHistoryItemTypes {
+  fine
+  prisonTerm
+  jailTerm
+  deprDrivingLicense
+  deprGunLicense
+}
+
+model CivilHistoryItem {
+  id            Int @id @default(autoincrement()) @unique
+  happened      DateTime @default(now())
+  freed         DateTime? 
+  description   String
+  type          CivilHistoryItemTypes
+
+  civilId       Int
+  civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
+}
+
+enum CarHistoryItemTypes {
+  confiscated
+  fined
+  stoped
+  selled
+  wanted
+}
+
+enum WeaponHistoryItemTypes {
+  confiscated
+  used // использовано в преступлении
+}
+
+model CarHistoryItem {
+  id            Int @id @default(autoincrement()) @unique
+  happened      DateTime @default(now())
+  freed         DateTime? 
+  description   String
+  type          CarHistoryItemTypes
+  
+  carId         Int
+  car           Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model WeaponHistoryItem {
+  id            Int @id @default(autoincrement()) @unique
+  happened      DateTime @default(now())
+  description   String
+  type          WeaponHistoryItemTypes
+  
+  civilId       Int
+  civil         Weapon @relation(fields: [civilId], references: [id], onDelete: Cascade)
+}
+
+
+model Car {
+  id            Int @id @default(autoincrement()) @unique
+  brand         String
+  plate         String
+  history       CarHistoryItem[]
+  color         String?
+
+  civilId       Int
+  civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
+}
+
+model Weapon {
+  id            Int @id @default(autoincrement()) @unique
+  serial        String
+  brand         String
+  history       WeaponHistoryItem[]
+  
+  civilId       Int
+  civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
+}
+
+model Civil {
+  id             Int @id @default(autoincrement()) @unique
+  name           String @unique
+  idCard         String
+  gunLicense     Boolean
+  drivingLicense Boolean
+  workPlace      String
+
+  history       CivilHistoryItem[]
+
+  cars          Car[]
+  weapons       Weapon[]
 }
