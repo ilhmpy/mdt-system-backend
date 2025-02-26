@@ -1,4 +1,4 @@
-import { Status } from "@prisma/client";
+import { OfficerHistoryItemTypes, Status } from "@prisma/client";
 
 export const officers = [
   {
@@ -7,6 +7,9 @@ export const officers = [
     badgeNumber: 'LS18217',
     location: 'Bay City Ave',
     status: Status.true,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingNumber: 32,
     shiftId: 3,
     roleId: 1,
@@ -19,6 +22,9 @@ export const officers = [
     lastUpdate: new Date('2025-02-21T09:55:36.485637'),
     badgeNumber: 'LS21751',
     location: 'Fantastic Place',
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     status: Status.true,
     shiftId: 1,
     roleId: 1,
@@ -35,6 +41,9 @@ export const officers = [
     markingNumber: 32,
     shiftId: 6,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$RgjFPRqtmxFHN+GcOneQKQ$1x51aNeEaNmZZrkJDmNIK8oZzJ7Zg+Z2a0p36x2XVvA',
@@ -49,6 +58,9 @@ export const officers = [
     roleId: 1,
     rankId: 4,
     markingId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     token: '$argon2id$v=19$m=65536,t=3,p=4$PFSx2+jiI2nIsNB+nShCJQ$NVWp1/dt7ZS4D9rALCCXxNOszjBlyA+ugZG8U2yYSM4',
   },
   {
@@ -61,6 +73,9 @@ export const officers = [
     roleId: 1,
     rankId: 4,
     markingId: 7,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     token: '$argon2id$v=19$m=65536,t=3,p=4$qDQedgc3VRmdZojO5zQWFQ$SEeoQET5bOq9fKm5R50m2TmrJEJxqK+sZPHvcgpewNM',
   },
   {
@@ -72,6 +87,9 @@ export const officers = [
     markingNumber: 55,
     shiftId: 5,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$Vly3WHgoZWWqy/A46sEEvA$NlvNf6kWVrCBPBEZwpGEjxM3HlAVrjMZzLelkmwBSR8',
@@ -85,6 +103,9 @@ export const officers = [
     markingNumber: 32,
     shiftId: 4,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$7V0duxjIjCUWxb7I01yY5A$E3FNulk1nUga5297oY7Q1wlU3DjLPazLdugnT2AK2HI',
@@ -99,6 +120,9 @@ export const officers = [
     isHead: true, 
     roleId: 2,
     rankId: 5,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 3,
     token: '$argon2id$v=19$m=65536,t=3,p=4$8kqvpTDYZhmiU44hlFZzmQ$bHuZDkER2FNnXkVKMNOz6RCnxKmjD4i5zn7nI7K7oF8',
   },
@@ -112,6 +136,9 @@ export const officers = [
     shiftId: 3,
     roleId: 1,
     rankId: 4,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$lXiQtfjv5bxLj6oauzzd7g$+fabiyKr4BTw2f74JNOoUHLxbudITF4hVhsAqE08+L8',
   },
@@ -124,6 +151,9 @@ export const officers = [
     shiftId: 1,
     roleId: 1,
     rankId: 4,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$ktAYJ6rNEMxFtP5w6zqj5g$Z9bUXliDIrxxcZ8eucmhVxcXVtPRU7Nt8OWe7w/9PyA',
   },
@@ -134,6 +164,9 @@ export const officers = [
     location: 'Senora Road',
     status: Status.true,
     markingNumber: 23,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     shiftId: 6,
     roleId: 3,
     rankId: 8,
@@ -148,6 +181,9 @@ export const officers = [
     shiftId: 6,
     markingNumber: 66,
     roleId: 2,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 5,
     isHead: true,
     markingId: 2,
@@ -163,6 +199,9 @@ export const officers = [
     roleId: 1,
     rankId: 4,
     markingId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     token: '$argon2id$v=19$m=65536,t=3,p=4$XuPnfQMwWczCF745hdEC3A$CKgwopzgTh2h6LRQEvBdqcaw1Pbh1B1WOkFdIEnmkqo',
   },
   {
@@ -175,6 +214,9 @@ export const officers = [
     shiftId: 5,
     roleId: 3,
     rankId: 7,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$DJWwye9eiPvP5zA2HKQx+g$wOvSW00wAAuaD3C/ADMEuTKYLN2X0zSlI/ar5CbLMps',
   },
@@ -187,6 +229,9 @@ export const officers = [
     shiftId: 1,
     roleId: 1,
     rankId: 4,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$NFLbRvFX/qOt3qaVdqK6vQ$o42mSbMlf8Xe0wAHtWVywmQfXpHTz2xw2tumS7lZuQA',
   },
@@ -200,6 +245,9 @@ export const officers = [
     shiftId: 4,
     roleId: 3,
     rankId: 6,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 5,
     token: '$argon2id$v=19$m=65536,t=3,p=4$q+Y1LUpN4bvaQFEFdKph+g$YgAFy3iv3ISq1r1rg2xiQBJgGQryL4UnNsnHjC7NhoI',
   },
@@ -210,6 +258,9 @@ export const officers = [
     location: 'Paleto Blvd',
     markingNumber: 13,
     shiftId: 3,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     roleId: 4,
     rankId: 2,
     markingId: 1,
@@ -222,6 +273,9 @@ export const officers = [
     location: 'Clinton Ave',
     status: Status.true,
     shiftId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     roleId: 1,
     rankId: 4,
     markingId: 2,
@@ -234,6 +288,9 @@ export const officers = [
     location: 'Alta Street',
     status: Status.true,
     shiftId: 2,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     roleId: 1,
     rankId: 4,
     markingId: 1,
@@ -247,6 +304,9 @@ export const officers = [
     status: Status.true,
     markingNumber: 19,
     shiftId: 5,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     roleId: 1,
     rankId: 4,
     markingId: 1,
@@ -259,6 +319,9 @@ export const officers = [
     location: 'Clinton Ave',
     markingNumber: 87,
     shiftId: 2,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     roleId: 1,
     rankId: 4,
     markingId: 1,
@@ -272,6 +335,9 @@ export const officers = [
     status: Status.true,
     shiftId: 4,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$QEoncOF/+3t8kPsSSKmU5Q$7AWOYjQJ5ETmwkD01kAnlYrb+c02ytSAZmCMS67j4Qw',
@@ -286,6 +352,9 @@ export const officers = [
     shiftId: 3,
     roleId: 1,
     rankId: 4,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$xRSYMSmOgHZYHCvcy9WhfA$T/p6kyeVpMa59kl34v4KPwstgCKg7bLOHv/q+7iv1Xs',
   },
@@ -298,6 +367,9 @@ export const officers = [
     markingNumber: 48,
     shiftId: 6,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$PR4zEM7+n7CiOiJOw5d17Q$iuchIeny7DEwDGciAVbe4S5dFSpI/p6PltGKJ+Xifdk',
@@ -311,6 +383,9 @@ export const officers = [
     markingNumber: 14,
     shiftId: 3,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$a2Qj5OnyVEpKlZ7KUIblbw$uFp307yYeAv9FoVLSFCnHuAVIiTrgN36I2FgMJMYftQ',
@@ -324,6 +399,9 @@ export const officers = [
     markingNumber: 18,
     shiftId: 4,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 2,
     token: '$argon2id$v=19$m=65536,t=3,p=4$lRTDMef9vHB5rAnR98yVeA$KNFCYblkgJW19A0dBtYXNk9tq+ka4Cc2Or3+cOvCR1k',
@@ -337,6 +415,9 @@ export const officers = [
     markingNumber: 18,
     shiftId: 2,
     roleId: 4,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 1,
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$3iiPXtSDtkXOf79K6vTn6A$h7ZsEu99Ig8zgPLauz+Ngh2HFamTa24YLE3Tn6qChpI',
@@ -349,6 +430,9 @@ export const officers = [
     status: Status.true,
     shiftId: 6,
     roleId: 1,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 4,
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$/etujWg59lz+/XM72MRf7w$Vt0zNdFX0BzgQ7YDZnLqcMEgyATdLw6W0Nuiu3PwWWM',
@@ -362,6 +446,9 @@ export const officers = [
     markingNumber: 43,
     shiftId: 5,
     roleId: 2,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     rankId: 5,
     markingId: 1,
     token: '$argon2id$v=19$m=65536,t=3,p=4$9aU+6Ma9Kqro2wBsjv3gUg$5JYw0FzwNkiMnKjD/TR5+KbXV3ISOE5159/uducsiAc',
@@ -373,6 +460,9 @@ export const officers = [
     location: 'Capital Blvd',
     status: Status.true,
     markingNumber: 48,
+    history: [
+      { description: "Promoted to Police Officer II", type: OfficerHistoryItemTypes.promoted }
+    ],
     shiftId: 5,
     roleId: 1,
     rankId: 4,

@@ -12,6 +12,8 @@ import { PanicService } from './panic/panic.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { NcincController } from './ncinc/ncinc.controller';
+import { NcincService } from './ncinc/ncinc.service';
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { APP_GUARD } from '@nestjs/core';
     OfficersController,
     AuthController,
     PanicController,
+    NcincController,
   ],
 
   providers: [
@@ -34,6 +37,7 @@ import { APP_GUARD } from '@nestjs/core';
     OfficersService,
     EventsGateway,
     PanicService,
+    NcincService,
 
     /*{
       provide: APP_GUARD,

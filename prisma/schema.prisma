@@ -22,12 +22,13 @@ enum Pages {
   reports
   forum
   control
+  cases
 }
 
 model Marking {
   id                  Int @id @default(autoincrement()) @unique
-  label               String @unique
-  marking             String @unique
+  label               String
+  marking             String
   pairedPatrolCrew    Boolean
 
   officers Officer[]
@@ -35,7 +36,7 @@ model Marking {
 
 model Rank {
   id   Int @id @default(autoincrement())
-  name String @unique
+  name String
   icon String?
 
   officers Officer[]
@@ -48,22 +49,22 @@ model Shift {
 }
 
 model Permission {
-  id Int @id @default(autoincrement())
-  canActivateName  Pages
-  get              Boolean
-  create           Boolean?
-  delete           Boolean?
-  update           Boolean?
-  selfUpdate       Boolean?
+  id                        Int @id @default(autoincrement())
+  canActivateName           Pages
+  get                       Boolean
+  create                    Boolean?
+  delete                    Boolean?
+  update                    Boolean?
+  selfUpdate                Boolean?
+  getInfoAboutOfficers      Boolean?
 
-  roleId Int
-  role   Role @relation(fields: [roleId], references: [id])
+  roleId                    Int
+  role                      Role @relation(fields: [roleId], references: [id])
 }
 
-// прописать массив рангов которые могут иметь эту роль
 model Role {
   id Int @id @default(autoincrement())
-  name String @unique
+  name String
   permissions Permission[] 
 
   officers Officer[]
@@ -80,29 +81,51 @@ model Panic {
   officer      Officer @relation(fields: [officerId], references: [id])
 }
 
+enum OfficerHistoryItemTypes {
+  award
+  dismissal
+  bonus
+  promoted
+  demoted
+  reinstated
+}
+
+model OfficerHistoryItem {
+  id              Int @id @default(autoincrement()) @unique
+  happened        DateTime? @default(now())
+  freed           DateTime? 
+  description     String
+  type            OfficerHistoryItemTypes
+
+  officerId       Int
+  officer         Officer @relation(fields: [officerId], references: [id], onDelete: Cascade)
+}
+
 model Officer {
-  id            Int       @id @default(autoincrement())
-  name          String    @unique
-  lastUpdate    DateTime  @default(now())
-  badgeNumber   String    @unique
-  location      String
-  status        Status?
-  markingNumber Int?      
-  isHead        Boolean?  @default(false)
+  id              Int       @id @default(autoincrement())
+  name            String
+  lastUpdate      DateTime  @default(now())
+  badgeNumber     String    @unique
+  location        String
+  status          Status?
+  markingNumber   Int?      
+  isHead          Boolean?  @default(false)
+  history         OfficerHistoryItem[]
+  onDuty          Boolean?  @default(true)
 
-  shiftId       Int
-  shift         Shift @relation(fields: [shiftId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  shiftId         Int
+  shift           Shift @relation(fields: [shiftId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  roleId        Int
-  role          Role @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  roleId          Int
+  role            Role @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  rankId        Int
-  rank          Rank @relation(fields: [rankId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  rankId          Int
+  rank            Rank @relation(fields: [rankId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  markingId     Int?
-  marking       Marking? @relation(fields: [markingId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  markingId       Int?
+  marking         Marking? @relation(fields: [markingId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
-  token         String  @unique
+  token           String  @unique
 
   panics Panic[]
 }
@@ -136,7 +159,9 @@ enum CarHistoryItemTypes {
 
 enum WeaponHistoryItemTypes {
   confiscated
-  used // использовано в преступлении
+  bought
+  used
+  wanted // in crime
 }
 
 model CarHistoryItem {
@@ -166,7 +191,8 @@ model Car {
   brand         String
   plate         String
   history       CarHistoryItem[]
-  color         String?
+  color         String? @default("")
+  wanted        Boolean? @default(false)
 
   civilId       Int
   civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
@@ -176,6 +202,7 @@ model Weapon {
   id            Int @id @default(autoincrement()) @unique
   serial        String
   brand         String
+  wanted        Boolean? @default(false)
   history       WeaponHistoryItem[]
   
   civilId       Int
@@ -184,14 +211,16 @@ model Weapon {
 
 model Civil {
   id             Int @id @default(autoincrement()) @unique
-  name           String @unique
+  name           String
   idCard         String
   gunLicense     Boolean
   drivingLicense Boolean
   workPlace      String
+  wanted         Boolean? @default(false)
+  isOfficer      Boolean? @default(false)
 
-  history       CivilHistoryItem[]
+  history        CivilHistoryItem[]
 
-  cars          Car[]
-  weapons       Weapon[]
+  cars           Car[]
+  weapons        Weapon[]
 }

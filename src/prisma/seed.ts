@@ -7,11 +7,11 @@ import { markings } from './data/markings';
 
 const prisma = new PrismaClient();
 
-const createType: "markingsRolesAndRanks" | "officer" = "officer"; 
+const createType: "markingsRolesRanksAndCivils" | "officer" = "officer"; 
 
 async function main() {
     switch(createType) {
-      case("markingsRolesAndRanks"): {
+      case("markingsRolesRanksAndCivils"): {
 
       for (const civil of civils) {
             await prisma.civil.create({
@@ -91,12 +91,24 @@ async function main() {
             prisma.shift.create({ data: {} }),
          ]);
         
-          const officersArr = officers.map((officer) =>
-            ({ ...officer, shiftId: shifts[Math.floor(Math.random() * shifts.length)].id })
-          )
+          /*const officersArr = officers.map((officer) =>
+            ({ ...officer, shiftId: shifts[Math.floor(Math.random() * shifts.length)].id, history: { create: officer.history.map((item) => ({ ...item })) } })
+          )*/
     
           await Promise.all([
-            prisma.officer.createMany({ data: officersArr })
+            officers.map(async (officer) => {
+              const createdOfficer = await prisma.officer.create({
+                data: {
+                  ...officer,
+                  shiftId: shifts[Math.floor(Math.random() * shifts.length)].id,
+                  history: {
+                    create: officer.history.map((item) => ({ ...item }))
+                  }
+                }
+              });
+          
+              return createdOfficer;
+            })
           ]);
       }
     }

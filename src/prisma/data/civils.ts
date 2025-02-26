@@ -2,7 +2,7 @@ import { CivilHistoryItemTypes, CarHistoryItemTypes, WeaponHistoryItemTypes} fro
 
 export const civils = [
   {
-    name: "Michael Smith",
+    name: "Michael Smaith",
     idCard: "855-590-6950",
     gunLicense: true,
     drivingLicense: true,
@@ -20,7 +20,7 @@ export const civils = [
     ],
   },
   {
-    name: "James Brown",
+    name: "James Browwn",
     idCard: "669-236-1833",
     gunLicense: false,
     drivingLicense: true,
@@ -32,7 +32,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "John Doe",
+    name: "John Doee",
     idCard: "737-781-5799",
     gunLicense: false,
     drivingLicense: false,
@@ -46,7 +46,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Sarah Williams",
+    name: "Sarah Williiams",
     idCard: "542-890-3453",
     gunLicense: true,
     drivingLicense: true,
@@ -63,7 +63,7 @@ export const civils = [
     ],
   },
   {
-    name: "David Lee",
+    name: "David Leee",
     idCard: "345-765-8902",
     gunLicense: false,
     drivingLicense: true,
@@ -76,7 +76,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Anna White",
+    name: "Anna Whhite",
     idCard: "654-987-1234",
     gunLicense: true,
     drivingLicense: true,
@@ -93,7 +93,7 @@ export const civils = [
     ],
   },
   {
-    name: "Jessica Parker",
+    name: "Jessica Parkker",
     idCard: "898-123-3456",
     gunLicense: true,
     drivingLicense: false,
@@ -108,7 +108,7 @@ export const civils = [
     ],
   },
   {
-    name: "Matthew Johnson",
+    name: "Matthew Johnsson",
     idCard: "908-612-5678",
     gunLicense: false,
     drivingLicense: true,
@@ -122,7 +122,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Samantha Green",
+    name: "Samantha Greeen",
     idCard: "765-987-3211",
     gunLicense: true,
     drivingLicense: true,
@@ -139,7 +139,7 @@ export const civils = [
     ],
   },
   {
-    name: "Chris Miller",
+    name: "Chris Milleer",
     idCard: "526-785-9534",
     gunLicense: true,
     drivingLicense: false,
@@ -153,7 +153,7 @@ export const civils = [
     ],
   },
   {
-    name: "George Miller",
+    name: "George Milleer",
     idCard: "875-336-9124",
     gunLicense: false,
     drivingLicense: true,
@@ -165,7 +165,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Tommy Grant",
+    name: "Tommy Granted",
     idCard: "912-654-3241",
     gunLicense: true,
     drivingLicense: true,
@@ -181,7 +181,7 @@ export const civils = [
     ],
   },
   {
-    name: "William Thomas",
+    name: "William Thomads",
     idCard: "634-982-1230",
     gunLicense: false,
     drivingLicense: true,
@@ -193,7 +193,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Olivia Davis",
+    name: "Olivia Davies",
     idCard: "983-426-7490",
     gunLicense: true,
     drivingLicense: true,
@@ -209,7 +209,7 @@ export const civils = [
     ],
   },
   {
-    name: "Eva Clark",
+    name: "Eva Clarka",
     idCard: "211-549-9201",
     gunLicense: false,
     drivingLicense: true,
@@ -221,7 +221,7 @@ export const civils = [
     weapons: [],
   },
   {
-    name: "Sophia Harris",
+    name: "Sophia Harrises",
     idCard: "765-423-9862",
     gunLicense: true,
     drivingLicense: true,
