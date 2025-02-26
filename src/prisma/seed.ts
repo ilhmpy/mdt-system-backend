@@ -7,7 +7,7 @@ import { markings } from './data/markings';
 
 const prisma = new PrismaClient();
 
-const createType: "markingsRolesRanksAndCivils" | "officer" = "officer"; 
+const createType: "markingsRolesRanksAndCivils" | "other" = "markingsRolesRanksAndCivils"; 
 
 async function main() {
     switch(createType) {
@@ -81,7 +81,7 @@ async function main() {
         break;
       
 
-      case("officer"): {    
+      case("other"): {    
          const shifts = await Promise.all([
             prisma.shift.create({ data: {} }),
             prisma.shift.create({ data: {} }),

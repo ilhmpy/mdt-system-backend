@@ -191,8 +191,9 @@ model Car {
   brand         String
   plate         String
   history       CarHistoryItem[]
-  color         String? @default("")
+  color         String? @default("red")
   wanted        Boolean? @default(false)
+  isRegistered  Boolean @default(false)
 
   civilId       Int
   civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
@@ -218,6 +219,13 @@ model Civil {
   workPlace      String
   wanted         Boolean? @default(false)
   isOfficer      Boolean? @default(false)
+  description    String? @default("")
+  dateOfBirth    DateTime @default(now())
+  sex            String @default("man")
+  race           String @default("white")
+  hair           String @default("black")
+  eyes           String @default("black")
+  phoneNumber    Int @default(2124233234)
 
   history        CivilHistoryItem[]
 

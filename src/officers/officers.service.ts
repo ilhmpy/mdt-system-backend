@@ -14,9 +14,10 @@ export class OfficersService {
             shift: true, 
             role: { 
                 include: { 
-                    permissions: true 
+                    permissions: true,
                 }
-            } 
+            },
+            history: true 
         }
     }
 

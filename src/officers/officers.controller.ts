@@ -6,8 +6,6 @@ import { OfficersService } from './officers.service';
 import { Marking, Officer, Status } from '@prisma/client';
 import { EventsGateway } from 'src/eventsgateway';
 
-let requests: string[] = [];
-
 @Controller('officers')
 export class OfficersController {
     constructor(private prisma: PrismaService, private OfficersService: OfficersService, private EventsGateway: EventsGateway) {}
