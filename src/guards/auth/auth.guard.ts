@@ -11,8 +11,6 @@ export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const isTokenCorrect: Promise<boolean> = this.AuthService.isTokenCorrect(this.AuthService.getToken(context));
-
     return this.AuthService.isTokenCorrect(this.AuthService.getToken(context));
   }
 }

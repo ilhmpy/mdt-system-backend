@@ -2,7 +2,6 @@ import { CanActivate, ExecutionContext, Injectable, Headers } from '@nestjs/comm
 import { EventsGateway } from 'src/eventsgateway';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from 'src/services/auth.service';
-import { GuardService } from 'src/services/guard.service';
 import { RolesService } from 'src/services/roles.service';
 
 
