@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpException, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, Put, Query, UseGuards } from '@nestjs/common';
 import { Car, Civil, Weapon } from '@prisma/client';
 import { AuthGuard } from 'src/guards/auth/auth.guard';
 import { RolesGuard } from 'src/guards/roles/roles.guard';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { NcincService } from './ncinc.service';
 
 const civilInclude = {
     history: true,
@@ -27,7 +28,7 @@ const autoInclude = {
 
 @Controller('ncinc')
 export class NcincController {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService, private NcincService: NcincService) {}
 
     @Get("get-civil")
     @UseGuards(AuthGuard, RolesGuard)
@@ -82,11 +83,35 @@ export class NcincController {
         } else {
             throw new HttpException("Not allowed param for this request", 404);
         }
-
+ 
         if (weapon.length > 0) {
             return weapon;
         } else {
             throw new HttpException("Weapon doesn't exist", 404);
+        }
+    }
+
+    @Put("wanted")
+    @UseGuards(AuthGuard, RolesGuard)
+    async wanted(
+        @Body() { id, description, type, issued }: { id: number, description: string, issued: number, type: "civil" | "car" | "weapon" }
+    ) {
+        console.log(type, issued)
+        if (type && issued) {
+            await this.prisma[type.toString()].update({
+                where: { id }, 
+                data: {
+                    wanted: true,
+                    history: {
+                        create: {
+                            happened: new Date(),
+                            description,
+                            type: this.NcincService.getHistoryItemType(type).wanted,
+                            issued: Number(issued),
+                        }
+                    }
+                }
+            });
         }
     }
 }

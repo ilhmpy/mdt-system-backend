@@ -136,6 +136,7 @@ enum CivilHistoryItemTypes {
   jailTerm
   deprDrivingLicense
   deprGunLicense
+  wanted
 }
 
 model CivilHistoryItem {
@@ -144,6 +145,7 @@ model CivilHistoryItem {
   freed         DateTime? 
   description   String
   type          CivilHistoryItemTypes
+  issued        Int?
 
   civilId       Int
   civil         Civil @relation(fields: [civilId], references: [id], onDelete: Cascade)
@@ -161,7 +163,7 @@ enum WeaponHistoryItemTypes {
   confiscated
   bought
   used
-  wanted // in crime
+  wanted
 }
 
 model CarHistoryItem {
@@ -170,7 +172,8 @@ model CarHistoryItem {
   freed         DateTime? 
   description   String
   type          CarHistoryItemTypes
-  
+  issued        Int?
+
   carId         Int
   car           Car @relation(fields: [carId], references: [id], onDelete: Cascade)
 }
@@ -180,6 +183,7 @@ model WeaponHistoryItem {
   happened      DateTime @default(now())
   description   String
   type          WeaponHistoryItemTypes
+  issued        Int?
   
   civilId       Int
   civil         Weapon @relation(fields: [civilId], references: [id], onDelete: Cascade)
