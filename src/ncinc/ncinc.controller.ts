@@ -4,6 +4,7 @@ import { AuthGuard } from 'src/guards/auth/auth.guard';
 import { RolesGuard } from 'src/guards/roles/roles.guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { NcincService } from './ncinc.service';
+import { EventsGateway } from 'src/eventsgateway';
 
 const civilInclude = {
     history: true,
@@ -28,7 +29,7 @@ const autoInclude = {
 
 @Controller('ncinc')
 export class NcincController {
-    constructor(private prisma: PrismaService, private NcincService: NcincService) {}
+    constructor(private prisma: PrismaService, private NcincService: NcincService, private EventsGateWay: EventsGateway) {}
 
     @Get("get-civil")
     @UseGuards(AuthGuard, RolesGuard)
@@ -96,22 +97,24 @@ export class NcincController {
     async wanted(
         @Body() { id, description, type, issued }: { id: number, description: string, issued: number, type: "civil" | "car" | "weapon" }
     ) {
-        console.log(type, issued)
         if (type && issued) {
-            await this.prisma[type.toString()].update({
+            const data = await this.prisma[type.toString()].update({
                 where: { id }, 
                 data: {
-                    wanted: true,
+                    wanted: true, 
                     history: {
                         create: {
                             happened: new Date(),
                             description,
                             type: this.NcincService.getHistoryItemType(type).wanted,
-                            issued: Number(issued),
+                            issued: Number(issued), 
                         }
-                    }
-                }
-            });
-        }
+                    },
+                },
+                include: type == "civil" ? civilInclude : autoInclude
+            }); 
+
+            this.EventsGateWay.server.emit("updateNCINCItem", { data, type });
+        }  
     }
-}
+} 
